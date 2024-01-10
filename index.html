@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<h2>Réservation</h2>
+
+<div class="center">
+ <form action="/submit_form">
+    <label for="date">Date:</label><br>
+    <select id="date" name="date">
+        <option value="concert1">Concert 1</option>
+        <option value="concert2">Concert 2</option>
+        <option value="concert3">Concert 3</option>
+        <option value="concert4">Concert 4</option>
+        <option value="concert5">Concert 5</option>
+    </select><br>
+    <label for="places">Nombres de places:</label><br>
+    <input type="number" id="places" name="places" min="1"><br>
+    <input type="submit" value="Enregistrer les réservations">
+ </form>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
