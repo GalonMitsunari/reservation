@@ -2,26 +2,34 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Réservation de Concert</title>
 </head>
 <body>
-
-<h2>Réservation</h2>
-
-<div class="center">
- <form action="/submit_form">
-    <label for="date">Date:</label><br>
-    <select id="date" name="date">
-        <option value="concert1">Concert 1</option>
-        <option value="concert2">Concert 2</option>
-        <option value="concert3">Concert 3</option>
-        <option value="concert4">Concert 4</option>
-        <option value="concert5">Concert 5</option>
-    </select><br>
-    <label for="places">Nombres de places:</label><br>
-    <input type="number" id="places" name="places" min="1"><br>
-    <input type="submit" value="Enregistrer les réservations">
- </form>
-</div>
+    <div class="container">
+        <div class="header">
+            <h1>Réservation de Concert</h1>
+        </div>
+        <div class="form-container">
+            <form id="concertForm">
+    <div id="concerts">
+      <div class="concert">
+        <label for="date">Date du concert:</label>
+        <select name="date" id="date" required>
+          <option value="">Sélectionnez une date</option>
+          <option value="2024-08-23">23 août 2024</option>
+          <option value="2025-05-24">24 mai 2025</option>
+          <option value="2024-09-07">7 septembre 2024</option>
+          <option value="2025-02-08">8 février 2025</option>
+          <option value="2025-04-09">9 avril 2025</option>
+        </select>
+        <label>Nombre de places (entre 1 et 5):</label>
+        <input type="number" name="places" min="1" max="5" required>
+        <button type="button" class="removeConcertBtn" onclick="removeConcert(this)">Supprimer ce concert</button>
+      </div>
+    </div>
+    <button type="button" id="addConcertBtn">Ajouter un concert</button>
+    <button type="button" id="finalizeBtn">Finaliser</button>
+  </form>
 
 <script src="script.js"></script>
 
