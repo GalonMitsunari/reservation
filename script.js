@@ -13,7 +13,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
       newConcertDiv.innerHTML = `
         <label>Date du concert:</label>
-        <input type="date" name="date" required>
+        <select name="date" id="date" required>
+        <option value="">Sélectionnez une date</option>
+          <option value="2024-08-23">23 août 2024</option> 
+          <option value="2025-05-24">24 mai 2025</option>
+          <option value="2024-09-07">7 septembre 2024</option>
+          <option value="2025-02-08">8 février 2025</option>
+          <option value="2025-04-09">9 avril 2025</option>
+        </select>
         <label>Nombre de places (entre 1 et 5):</label>
         <input type="number" name="places" min="1" max="5" required>
         <button type="button" class="removeConcertBtn" onclick="removeConcert(this)">Supprimer ce concert</button>
