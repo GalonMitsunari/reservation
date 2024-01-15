@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <label>Date du concert:</label>
         <select name="date" id="date" required>
         <option value="">Sélectionnez une date</option>
-          <option value="2024-08-23">23 août 2024</option> 
+          <option value="2024-08-23">23 août 2024</option>
           <option value="2025-05-24">24 mai 2025</option>
           <option value="2024-09-07">7 septembre 2024</option>
           <option value="2025-02-08">8 février 2025</option>
