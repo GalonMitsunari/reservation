@@ -7,7 +7,6 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f2f2f2;
-    /* Couleur d'arrière-plan */
 }
 
 .container {
@@ -16,8 +15,7 @@ body {
 
 .header {
     text-align: left;
-    color: #4CAF50;
-    /* Couleur du texte de l'en-tête */
+    color: #a61db9;
     margin-bottom: 20px;
 }
 
@@ -36,7 +34,7 @@ input {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #a61db9;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -48,7 +46,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #a61db9;
 }
 
 .concert {

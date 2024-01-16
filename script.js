@@ -1,10 +1,10 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const concertForm = document.getElementById("concertForm");
   const addConcertBtn = document.getElementById("addConcertBtn");
   const finalizeBtn = document.getElementById("finalizeBtn");
   let concertCount = 1;
 
-  addConcertBtn.addEventListener("click", function() {
+  addConcertBtn.addEventListener("click", function () {
     if (concertCount < 5) {
       concertCount++;
       const concertsDiv = document.getElementById("concerts");
@@ -13,13 +13,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
       newConcertDiv.innerHTML = `
         <label>Date du concert:</label>
-        <select name="date" id="date" required>
-        <option value="">Sélectionnez une date</option>
+        <select name="date" class="date-select" required>
+          <option value="">Sélectionnez une date</option>
           <option value="2024-08-23">23 août 2024</option>
-          <option value="2025-05-24">24 mai 2025</option>
           <option value="2024-09-07">7 septembre 2024</option>
           <option value="2025-02-08">8 février 2025</option>
           <option value="2025-04-09">9 avril 2025</option>
+          <option value="2025-05-24">24 mai 2025</option>
         </select>
         <label>Nombre de places (entre 1 et 5):</label>
         <input type="number" name="places" min="1" max="5" required>
@@ -27,24 +27,31 @@ document.addEventListener("DOMContentLoaded", function() {
       `;
 
       concertsDiv.appendChild(newConcertDiv);
+
+      // Mettre à jour les options de date pour tous les formulaires
+      updateDateOptions();
     }
+
+    updateButtonVisibility();
   });
 
-  concertForm.addEventListener("click", function(event) {
+  concertForm.addEventListener("click", function (event) {
     if (event.target.classList.contains("removeConcertBtn")) {
       const concertDiv = event.target.parentElement;
       concertDiv.remove();
       concertCount--;
+
+      updateButtonVisibility();
     }
   });
 
-  finalizeBtn.addEventListener("click", function() {
+  finalizeBtn.addEventListener("click", function () {
     const concertForms = document.querySelectorAll(".concert");
     const selectedConcerts = [];
 
-    concertForms.forEach(form => {
-    const dateSelect = form.querySelector('select[name="date"]');
-    const date = dateSelect.options[dateSelect.selectedIndex].value;
+    concertForms.forEach((form) => {
+      const dateSelect = form.querySelector('select[name="date"]');
+      const date = dateSelect.options[dateSelect.selectedIndex].value;
       const places = form.querySelector('input[name="places"]').value;
 
       selectedConcerts.push({ date, places });
@@ -52,6 +59,36 @@ document.addEventListener("DOMContentLoaded", function() {
 
     console.log("Concerts sélectionnés:", selectedConcerts);
   });
+
+  // Fonction pour mettre à jour l'affichage des boutons
+  function updateButtonVisibility() {
+    const removeButtons = document.querySelectorAll(".removeConcertBtn");
+    const addButtonVisible = concertCount < 5;
+    const removeButtonVisible = concertCount >= 2;
+
+    addConcertBtn.style.display = addButtonVisible ? "block" : "none";
+
+    removeButtons.forEach((button) => {
+      button.style.display = removeButtonVisible ? "block" : "none";
+    });
+  }
+
+  // Fonction pour mettre à jour les options de date
+  function updateDateOptions() {
+    const dateSelects = document.querySelectorAll('.date-select');
+    const selectedDates = Array.from(dateSelects).map(select => select.value);
+
+    dateSelects.forEach((select) => {
+      const options = select.querySelectorAll('option');
+      options.forEach((option) => {
+        if (selectedDates.includes(option.value) && option.value !== select.value) {
+          option.disabled = true;
+        } else {
+          option.disabled = false;
+        }
+      });
+    });
+  }
 });
 
 function removeConcert(btn) {
