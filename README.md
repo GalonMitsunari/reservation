@@ -35,10 +35,6 @@ Fonctionnalités Futures :
 L'ajout d'une vérification pour éviter la sélection de la même date plusieurs fois améliorera l'expérience utilisateur et évitera toute confusion.
 Possibilité d'intégrer une fonctionnalité de confirmation avant la suppression d'une réservation pour éviter des actions accidentelles.
 
-Problèmes en cours :
+Travail en cours :
 
-Contrôle du JS non pris en compte par le premier affichage html
-
-A faire : 
-
-Améliorer les gestions en JS pour les boutons et contrôle de date
+Gestion des dates déjà seléctionnées 
