@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const concertForm = document.getElementById("concertForm");
   const addConcertBtn = document.getElementById("addConcertBtn");
   const finalizeBtn = document.getElementById("finalizeBtn");
-  let concertCount = 1;
+  let concertCount = document.querySelectorAll(".concert").length;
 
   addConcertBtn.addEventListener("click", function () {
     if (concertCount < 5) {
@@ -39,9 +39,11 @@ document.addEventListener("DOMContentLoaded", function () {
       concertDiv.remove();
       concertCount--;
 
+      // S'assurer qu'il reste au moins un formulaire
       if (concertCount === 0) {
         addConcertBtn.click();
       }
+
       updateButtonVisibility();
     }
   });
@@ -50,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const concertForms = document.querySelectorAll(".concert");
     const selectedConcerts = [];
 
-    // Vérifier au moins un formulaire de concert rempli
+    // Vérifier s'il y a au moins un formulaire de concert rempli
     let isAtLeastOneFormFilled = false;
 
     concertForms.forEach((form) => {
@@ -58,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const date = dateSelect.options[dateSelect.selectedIndex].value;
       const places = form.querySelector('input[name="places"]').value;
 
-      // Vérifier valeurs non vides
+      // Vérifier si le formulaire est rempli en vérifiant les valeurs non vides
       if (date && places) {
         isAtLeastOneFormFilled = true;
       }
@@ -67,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if (isAtLeastOneFormFilled) {
-      // Vérifier formulaire ajouté qui est vide
+      // Vérifier s'il y a un formulaire ajouté qui est vide
       const isAnyFormEmpty = Array.from(concertForms).some((form) => {
         const dateSelect = form.querySelector('select[name="date"]');
         const date = dateSelect.options[dateSelect.selectedIndex].value;
@@ -88,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateButtonVisibility() {
     const removeButtons = document.querySelectorAll(".removeConcertBtn");
     const addButtonVisible = concertCount < 5;
-    const removeButtonVisible = concertCount > 1; 
+    const removeButtonVisible = concertCount > 1;
 
     addConcertBtn.style.display = addButtonVisible ? "block" : "none";
 
