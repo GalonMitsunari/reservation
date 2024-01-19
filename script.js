@@ -27,8 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
 
       concertsDiv.appendChild(newConcertDiv);
-
-      // Mettre à jour les options de date pour tous les formulaires
       updateDateOptions();
     }
 
@@ -41,6 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
       concertDiv.remove();
       concertCount--;
 
+      if (concertCount === 0) {
+        addConcertBtn.click();
+      }
       updateButtonVisibility();
     }
   });
@@ -49,22 +50,45 @@ document.addEventListener("DOMContentLoaded", function () {
     const concertForms = document.querySelectorAll(".concert");
     const selectedConcerts = [];
 
+    // Vérifier au moins un formulaire de concert rempli
+    let isAtLeastOneFormFilled = false;
+
     concertForms.forEach((form) => {
       const dateSelect = form.querySelector('select[name="date"]');
       const date = dateSelect.options[dateSelect.selectedIndex].value;
       const places = form.querySelector('input[name="places"]').value;
 
+      // Vérifier valeurs non vides
+      if (date && places) {
+        isAtLeastOneFormFilled = true;
+      }
+
       selectedConcerts.push({ date, places });
     });
 
-    console.log("Concerts sélectionnés:", selectedConcerts);
+    if (isAtLeastOneFormFilled) {
+      // Vérifier formulaire ajouté qui est vide
+      const isAnyFormEmpty = Array.from(concertForms).some((form) => {
+        const dateSelect = form.querySelector('select[name="date"]');
+        const date = dateSelect.options[dateSelect.selectedIndex].value;
+        const places = form.querySelector('input[name="places"]').value;
+        return !date || !places;
+      });
+
+      if (isAnyFormEmpty) {
+        alert("Veuillez remplir tous les formulaires de concert avant de finaliser.");
+      } else {
+        console.log("Concerts sélectionnés:", selectedConcerts);
+      }
+    } else {
+      alert("Veuillez remplir au moins un formulaire de concert avant de finaliser.");
+    }
   });
 
-  // Fonction pour mettre à jour l'affichage des boutons
   function updateButtonVisibility() {
     const removeButtons = document.querySelectorAll(".removeConcertBtn");
     const addButtonVisible = concertCount < 5;
-    const removeButtonVisible = concertCount >= 2;
+    const removeButtonVisible = concertCount > 1; 
 
     addConcertBtn.style.display = addButtonVisible ? "block" : "none";
 
@@ -73,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Fonction pour mettre à jour les options de date
   function updateDateOptions() {
     const dateSelects = document.querySelectorAll('.date-select');
     const selectedDates = Array.from(dateSelects).map(select => select.value);
